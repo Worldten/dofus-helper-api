@@ -104,6 +104,38 @@ class ItemController {
       return util.send(res);
     }
   }
+
+  static async getAllNonWeapons(req, res) {
+    try {
+      console.log("On est dans le controller")
+      const allItems = await ItemService.getAllNonWeapons();
+      if (allItems.length > 0) {
+        util.setSuccess(200, 'Items retrieved', allItems);
+      } else {
+        util.setSuccess(200, 'No Item found');
+      }
+      return util.send(res);
+    } catch (error) {
+      util.setError(400, error);
+      return util.send(res);
+    }
+  }
+
+  static async getAllWeapons(req, res) {
+    try {
+      console.log("On est dans le controller")
+      const allItems = await ItemService.getAllWeapons();
+      if (allItems.length > 0) {
+        util.setSuccess(200, 'Items retrieved', allItems);
+      } else {
+        util.setSuccess(200, 'No Item found');
+      }
+      return util.send(res);
+    } catch (error) {
+      util.setError(400, error);
+      return util.send(res);
+    }
+  }
 }
 
 export default ItemController;

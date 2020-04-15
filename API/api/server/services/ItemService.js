@@ -1,4 +1,7 @@
 import database from '../src/models';
+import Sequelize from 'sequelize';
+
+const Op = Sequelize.Op;
 
 class ItemService {
   static async getAllItems() {
@@ -61,6 +64,33 @@ class ItemService {
     } catch (error) {
       throw error;
     }
+  }
+
+  static async getAllNonWeapons(){
+    try {
+      return await database.item.findAll({ where: {
+        item_type :{
+          [Op.or]: ["Bottes", "Ceinture", "Cape", "Chapeau", "Anneau", "Amulette", "Bouclier"]
+        }
+      }});
+    } catch (error) {
+      console.log("Erreur dans le service" + error);
+      throw error;
+    }
+    
+  }
+  static async getAllWeapons(){
+    try {
+      return await database.item.findAll({ where: {
+        item_type :{
+          [Op.or]: ["Épée", "Dague", "Baguette", "Marteau", "Arc", "Pelle", "Hache", "Pioche", "Bâton", "Faux"]
+        }
+      }});
+    } catch (error) {
+      console.log("Erreur dans le service" + error);
+      throw error;
+    }
+    
   }
 }
 

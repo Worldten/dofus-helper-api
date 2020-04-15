@@ -5,6 +5,8 @@ const router = Router();
 
 router.get('/', ItemController.getAllItems);
 router.post('/', ItemController.addItem);
+router.get('/stuff', ItemController.getAllNonWeapons);
+router.get('/weapons', ItemController.getAllWeapons);
 router.get('/:id', ItemController.getAItem);
 router.put('/:id', ItemController.updatedItem);
 router.delete('/:id', ItemController.deleteItem);
