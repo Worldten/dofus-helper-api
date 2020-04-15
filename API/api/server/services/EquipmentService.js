@@ -1,9 +1,9 @@
 import database from '../src/models';
 
 class EquipmentService {
-  static async get() {
+  static async getAllEquipments() {
     try {
-      return await database.equipment.findAll();
+      return await database.equipments.findAll();
     } catch (error) {
       console.log("Erreur dans le service" + error);
       throw error;
@@ -12,7 +12,7 @@ class EquipmentService {
 
   static async addEquipment(newEquipment) {
     try {
-      return await database.equipment.create(newEquipment);
+      return await database.equipments.create(newEquipment);
     } catch (error) {
       throw error;
     }
@@ -20,12 +20,12 @@ class EquipmentService {
 
   static async updateEquipment(id, updateEquipment) {
     try {
-      const EquipmentToUpdate = await database.equipment.findOne({
+      const EquipmentToUpdate = await database.equipments.findOne({
         where: { id: Number(id) }
       });
 
       if (EquipmentToUpdate) {
-        await database.equipment.update(updateEquipment, { where: { id: Number(id) } });
+        await database.equipments.update(updateEquipment, { where: { id: Number(id) } });
 
         return updateEquipment;
       }
@@ -37,7 +37,7 @@ class EquipmentService {
 
   static async getAEquipment(id) {
     try {
-      const theEquipment = await database.equipment.findOne({
+      const theEquipment = await database.equipments.findOne({
         where: { id: Number(id) }
       });
 
@@ -49,10 +49,10 @@ class EquipmentService {
 
   static async deleteEquipment(id) {
     try {
-      const EquipmentToDelete = await database.equipment.findOne({ where: { id: Number(id) } });
+      const EquipmentToDelete = await database.equipments.findOne({ where: { id: Number(id) } });
 
       if (EquipmentToDelete) {
-        const deletedEquipment = await database.equipment.destroy({
+        const deletedEquipment = await database.equipments.destroy({
           where: { id: Number(id) }
         });
         return deletedEquipment;

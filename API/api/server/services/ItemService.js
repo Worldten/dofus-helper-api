@@ -1,7 +1,7 @@
 import database from '../src/models';
 
 class ItemService {
-  static async get() {
+  static async getAllItems() {
     try {
       return await database.item.findAll();
     } catch (error) {
