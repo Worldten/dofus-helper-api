@@ -1,0 +1,12 @@
+# docker-compose.yml
+version: '3'
+services:
+  postgres:
+    ports:
+      - "5432:5432" 
+    image: "postgres" # use latest official postgres version
+    container_name: "dofus-helper"
+    env_file:
+      - database.env # configure postgre
+    volumes:
+      - /var/lib/postgresql/data
