@@ -62,7 +62,7 @@ describe('Testing the equipment endpoints:', () => {
   });
 
   it('It should get a particular equipment', (done) => {
-    const equipmentId = 1;
+    const equipmentId = -1;
     chai.request(app)
       .get(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
