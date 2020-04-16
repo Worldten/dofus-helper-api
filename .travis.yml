@@ -18,7 +18,7 @@ before-install:
 
 before_script:
   - psql -c 'create database dofus_helper;' -U postgres
-  - psql -c "CREATE USER thomas WITH PASSWORD 'cakPls-led2';" -U postgres
+  - psql -c "CREATE USER thomas WITH PASSWORD 'password';" -U postgres
   - npm run build
   - npm install -g sequelize-cli
   - sequelize db:migrate
