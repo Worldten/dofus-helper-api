@@ -1,0 +1,31 @@
+"use strict";
+
+require('dotenv').config();
+
+module.exports = {
+  "development": {
+    "username": "thomas",
+    "password": "cakPls-led2",
+    "database": "dofus_helper",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "thomas",
+    "password": "cakPls-led2",
+    "database": "dofus_helper",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "thomas",
+    "password": "cakPls-led2",
+    "database": "dofus_helper",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+};
+//# sourceMappingURL=config.js.map
