@@ -14,7 +14,7 @@ env:
   - NODE_ENV=test
 
 before-install:
-  -cd API
+  - cd API
 
 before_script:
   - psql -c 'create database book_test;' -U postgres
