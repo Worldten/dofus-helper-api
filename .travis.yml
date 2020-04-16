@@ -23,8 +23,8 @@ before_script:
   - npm install -g sequelize-cli
   - sequelize db:migrate
 script:
-  - npm test-item
-  - npm test-equp
-  - npm test-player
+  - npm run test-item
+  - npm run test-equp
+  - npm run test-player
 after_success:
   - npm run coverage
