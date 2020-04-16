@@ -22,7 +22,7 @@ class EquipmentController {
 
   static async addEquipment(req, res) {
     console.log("On est dans le controller");
-    if (!req.body.Equipment_mail) {
+    if (!req.body.equipment_name) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
     }
