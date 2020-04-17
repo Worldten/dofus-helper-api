@@ -92,6 +92,19 @@ class ItemService {
     }
     
   }
+
+  static async getItemFilter(filter){
+    try {
+      return await database.item.findAll({ where: {
+        item_name :{
+          [Op.iLike]: "%"+filter.name+"%"
+        },
+      }});
+    } catch (error) {
+      console.log("Erreur dans le service" + error);
+      throw error;
+    }
+  }
 }
 
 export default ItemService;

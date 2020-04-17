@@ -5,6 +5,7 @@ const router = Router();
 
 router.get('/', ItemController.getAllItems);
 router.post('/', ItemController.addItem);
+router.get('/filter', ItemController.getItemFilter)
 router.get('/stuff', ItemController.getAllNonWeapons);
 router.get('/weapons', ItemController.getAllWeapons);
 router.get('/:id', ItemController.getAItem);
