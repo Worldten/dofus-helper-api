@@ -8,36 +8,39 @@ const { expect } = chai;
 
 describe('Testing the item endpoints:', () => {
   it('It should create an item', (done) => {
-    const item = {
-      item_id: 0,
-      item_name: "Test",
-      item_level: 0,
-      item_type: "Epee",
-      item_image: "url",
-      item_recipe: {
-        "Pépite" : {
-          "item_id": 0,
-          "item_image": "url",
-          "item_level": 0,
-          "quantity": 0
+    setTimeout(function(){
+      const item = {
+        item_id: 0,
+        item_name: "Test",
+        item_level: 0,
+        item_type: "Epee",
+        item_image: "url",
+        item_recipe: {
+          "Pépite" : {
+            "item_id": 0,
+            "item_image": "url",
+            "item_level": 0,
+            "quantity": 0
+          }
         }
-      }
-    };
-    chai.request(app)
-      .post('/api/v1/items')
-      .set('Accept', 'application/json')
-      .send(item)
-      .end((err, res) => {
-        expect(res.status).to.equal(201);
-        expect(res.body.data).to.include({
-          item_id: item.item_id,
-          item_name: item.item_name,
-          item_level: item.item_level,
-          item_type: item.item_type,
-          item_image: item.item_image,
+      };
+      chai.request(app)
+        .post('/api/v1/items')
+        .set('Accept', 'application/json')
+        .send(item)
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          expect(res.body.data).to.include({
+            item_id: item.item_id,
+            item_name: item.item_name,
+            item_level: item.item_level,
+            item_type: item.item_type,
+            item_image: item.item_image,
+          });
+          done();
         });
-        done();
-      });
+    }, 200)
+
   });
 
   it('It should not create an item with incomplete parameters', (done) => {
