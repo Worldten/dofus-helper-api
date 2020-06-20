@@ -8,7 +8,6 @@ const { expect } = chai;
 
 describe('Testing the item endpoints:', () => {
   it('It should create an item', (done) => {
-    setTimeout(function(){
       const item = {
         item_id: 0,
         item_name: "Test",
@@ -37,9 +36,8 @@ describe('Testing the item endpoints:', () => {
             item_type: item.item_type,
             item_image: item.item_image,
           });
-          done();
         });
-    }, 200)
+        done();
 
   });
 
