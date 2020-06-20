@@ -10,4 +10,3 @@ services:
       - database.env # configure postgre
     volumes:
       - /var/lib/postgresql/data
-      - ./postgres-data:/var/lib/postgresql/data

@@ -35,6 +35,18 @@ class EquipmentService {
     }
   }
 
+  static async getEquipmentbyPlayer(playerId) {
+    try {
+      const Equipments = await database.equipments.findAll({
+        where: { player_id: Number(playerId) }
+      });
+
+      return Equipments;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async getAEquipment(id) {
     try {
       const theEquipment = await database.equipments.findOne({

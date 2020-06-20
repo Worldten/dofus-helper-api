@@ -105,6 +105,15 @@ class ItemService {
       throw error;
     }
   }
+
+  static async getItemLimit(limit) {
+    try {
+      return await database.item.findAll({limit: limit});
+    } catch (error) {
+      console.log("Erreur dans le service" + error);
+      throw error;
+    }
+  }
 }
 
 export default ItemService;

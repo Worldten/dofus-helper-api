@@ -47,6 +47,18 @@ class PlayerService {
     }
   }
 
+  static async getAPlayerMail(mail) {
+    try {
+      const thePlayer = await database.player.findOne({
+        where: { player_mail: mail }
+      });
+
+      return thePlayer;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async deletePlayer(id) {
     try {
       const PlayerToDelete = await database.player.findOne({ where: { id: Number(id) } });

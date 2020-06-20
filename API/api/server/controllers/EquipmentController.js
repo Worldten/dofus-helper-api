@@ -73,7 +73,30 @@ class EquipmentController {
       if (!theEquipment) {
         util.setError(404, `Cannot find Equipment with the id ${id}`);
       } else {
-        util.setSuccess(200, 'Found Equipment', theEquipment);
+        util.setSuccess(200, 'Found Equipment for an id', theEquipment);
+      }
+      return util.send(res);
+    } catch (error) {
+      util.setError(404, error);
+      return util.send(res);
+    }
+  }
+
+  static async getEquipmentsByPlayer(req, res) {
+    const { id } = req.params;
+
+    if (!Number(id)) {
+      util.setError(400, 'Please input a valid numeric value');
+      return util.send(res);
+    }
+
+    try {
+      const Equipments = await EquipmentService.getEquipmentbyPlayer(id);
+
+      if (!Equipments) {
+        util.setError(404, `Cannot find Equipment with the id ${id}`);
+      } else {
+        util.setSuccess(200, 'Found Equipment for a player', Equipments);
       }
       return util.send(res);
     } catch (error) {

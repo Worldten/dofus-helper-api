@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import PlayerController from '../controllers/PlayerController';
 
+var authController = require("../controllers/AuthController")
 const router = Router();
 
 router.get('/', PlayerController.getAllPlayers);
 router.post('/', PlayerController.addPlayer);
-router.get('/:id', PlayerController.getAPlayer);
+router.post('/login', PlayerController.signIn);
+router.get('/:id', authController.verifyToken, PlayerController.getAPlayer);
 router.put('/:id', PlayerController.updatedPlayer);
 router.delete('/:id', PlayerController.deletePlayer);
 

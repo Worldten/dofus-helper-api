@@ -6,7 +6,6 @@ const util = new Util();
 class ItemController {
   static async getAllItems(req, res) {
     try {
-      console.log("On est dans le controller")
       const allItems = await ItemService.getAllItems();
       if (allItems.length > 0) {
         util.setSuccess(200, 'Items retrieved', allItems);
@@ -21,7 +20,6 @@ class ItemController {
   }
 
   static async addItem(req, res) {
-    console.log("On est dans le controller");
     if (!req.body.item_name) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
@@ -107,7 +105,6 @@ class ItemController {
 
   static async getAllNonWeapons(req, res) {
     try {
-      console.log("On est dans le controller")
       const allItems = await ItemService.getAllNonWeapons();
       if (allItems.length > 0) {
         util.setSuccess(200, 'Items retrieved', allItems);
@@ -123,7 +120,6 @@ class ItemController {
 
   static async getAllWeapons(req, res) {
     try {
-      console.log("On est dans le controller")
       const allItems = await ItemService.getAllWeapons();
       if (allItems.length > 0) {
         util.setSuccess(200, 'Items retrieved', allItems);
@@ -141,8 +137,24 @@ class ItemController {
   static async getItemFilter(req, res) {
     const itemFilter = req.body;
     try {
-      console.log("On est dans le controller")
       const allItems = await ItemService.getItemFilter(itemFilter);
+      if (allItems.length > 0) {
+        util.setSuccess(200, 'Items retrieved', allItems);
+      } else {
+        util.setSuccess(200, 'No Item found');
+      }
+      return util.send(res);
+    } catch (error) {
+      util.setError(400, error);
+      return util.send(res);
+    }
+  }
+
+  static async getItemLimit(req, res){
+    const { limit } = req.params;
+
+    try {
+      const allItems = await ItemService.getItemLimit(limit);
       if (allItems.length > 0) {
         util.setSuccess(200, 'Items retrieved', allItems);
       } else {
