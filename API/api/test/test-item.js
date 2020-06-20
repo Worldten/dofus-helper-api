@@ -9,7 +9,6 @@ const { expect } = chai;
 describe('Testing the item endpoints:', () => {
   it('It should create an item', (done) => {
     const item = {
-      id: -1,
       item_id: 0,
       item_name: "Test",
       item_level: 0,
@@ -31,7 +30,6 @@ describe('Testing the item endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(201);
         expect(res.body.data).to.include({
-          id: item.id,
           item_id: item.item_id,
           item_name: item.item_name,
           item_level: item.item_level,
@@ -44,8 +42,6 @@ describe('Testing the item endpoints:', () => {
 
   it('It should not create an item with incomplete parameters', (done) => {
     const item = {
-      id: -1,
-      item_name: "Test",
       item_level: 0,
       item_type: "Epee",
       item_image: "url",
@@ -80,7 +76,7 @@ describe('Testing the item endpoints:', () => {
   });
 
   it('It should get a particular item', (done) => {
-    const itemId = -1;
+    const itemId = 1;
     chai.request(app)
       .get(`/api/v1/items/${itemId}`)
       .set('Accept', 'application/json')
@@ -123,7 +119,7 @@ describe('Testing the item endpoints:', () => {
   });
 
   it('It should update a item', (done) => {
-    const itemId = -1;
+    const itemId = 1;
     const updateditem = {
       id: itemId,
       item_id: -1,
@@ -203,7 +199,7 @@ describe('Testing the item endpoints:', () => {
 
 
   it('It should delete a item', (done) => {
-    const itemId = -1;
+    const itemId = 1;
     chai.request(app)
       .delete(`/api/v1/items/${itemId}`)
       .set('Accept', 'application/json')
