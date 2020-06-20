@@ -56,8 +56,9 @@ describe('Testing the item endpoints:', () => {
       .send(item)
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        done();
+
       });
+      done();
   });
 
   it('It should get all items', (done) => {
@@ -72,8 +73,9 @@ describe('Testing the item endpoints:', () => {
         res.body.data[0].should.have.property('item_type');
         res.body.data[0].should.have.property('item_image');
         res.body.data[0].should.have.property('item_recipe');
-        done();
+
       });
+      done();
   });
 
   it('It should get a particular item', (done) => {
@@ -89,8 +91,9 @@ describe('Testing the item endpoints:', () => {
         res.body.data.should.have.property('item_type');
         res.body.data.should.have.property('item_image');
         res.body.data.should.have.property('item_recipe');
-        done();
+
       });
+      done();
   });
 
   it('It should not get a particular item with invalid id', (done) => {
@@ -102,8 +105,9 @@ describe('Testing the item endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Cannot find Item with the id ${itemId}`);
-        done();
+
       });
+      done();
   });
 
   it('It should not get a particular item with non-numeric id', (done) => {
@@ -115,8 +119,9 @@ describe('Testing the item endpoints:', () => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message')
                             .eql('Please input a valid numeric value');
-        done();
+
       });
+      done();
   });
 
   it('It should update a item', (done) => {
@@ -144,8 +149,9 @@ describe('Testing the item endpoints:', () => {
         expect(res.body.data.item_level).equal(updateditem.item_level);
         expect(res.body.data.item_type).equal(updateditem.item_type);
         expect(res.body.data.item_image).equal(updateditem.item_image);
-        done();
+
       });
+      done();
   });
 
   it('It should not update a item with invalid id', (done) => {
@@ -169,8 +175,9 @@ describe('Testing the item endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Cannot find Item with the id: ${itemId}`);
-        done();
+
       });
+      done();
   });
 
   it('It should not update a item with non-numeric id value', (done) => {
@@ -194,8 +201,9 @@ describe('Testing the item endpoints:', () => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message')
                             .eql('Please input a valid numeric value');
-        done();
+
       });
+      done();
   });
 
 
@@ -207,8 +215,9 @@ describe('Testing the item endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.data).to.include({});
-        done();
+
       });
+      done();
   });
 
   it('It should not delete a item with invalid id', (done) => {
@@ -220,8 +229,9 @@ describe('Testing the item endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Item with the id ${itemId} cannot be found`);
-        done();
+
       });
+      done();
   });
 
   it('It should not delete a item with non-numeric id', (done) => {
@@ -232,7 +242,8 @@ describe('Testing the item endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message').eql('Please provide a numeric value');
-        done();
+
       });
+      done();
   });
 });

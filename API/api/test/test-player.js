@@ -39,8 +39,9 @@ describe('Testing the player endpoints:', () => {
           player_mail: player.player_mail,
           player_username: player.player_username
         });
-        done();
+
       });
+      done();
   });
 
   it('It should not create a player with incomplete parameters', (done) => {
@@ -56,8 +57,9 @@ describe('Testing the player endpoints:', () => {
       .send(player)
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        done();
+
       });
+      done();
   });
 
   it('It should get all players', (done) => {
@@ -73,8 +75,9 @@ describe('Testing the player endpoints:', () => {
         res.body.data[0].should.have.property('player_confirmedmail');
         res.body.data[0].should.have.property('player_jobs');
         res.body.data[0].should.have.property('player_characters');
-        done();
+
       });
+      done();
   });
 
   it('It should get a particular player', (done) => {
@@ -91,8 +94,9 @@ describe('Testing the player endpoints:', () => {
         res.body.data.should.have.property('player_confirmedmail');
         res.body.data.should.have.property('player_jobs');
         res.body.data.should.have.property('player_characters');
-        done();
+
       });
+      done();
   });
 
   it('It should not get a particular player with invalid id', (done) => {
@@ -104,8 +108,9 @@ describe('Testing the player endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Cannot find Player with the id ${playerId}`);
-        done();
+
       });
+      done();
   });
 
   it('It should not get a particular player with non-numeric id', (done) => {
@@ -117,8 +122,9 @@ describe('Testing the player endpoints:', () => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message')
                             .eql('Please input a valid numeric value');
-        done();
+
       });
+      done();
   });
 
   it('It should update a player', (done) => {
@@ -141,8 +147,9 @@ describe('Testing the player endpoints:', () => {
         expect(res.body.data.player_mail).equal(updatedplayer.player_mail);
         expect(res.body.data.player_pwd).equal(updatedplayer.player_pwd);
         expect(res.body.data.player_username).equal(updatedplayer.player_username);
-        done();
+
       });
+      done();
   });
 
   it('It should not update a player with invalid id', (done) => {
@@ -160,8 +167,9 @@ describe('Testing the player endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Cannot find Player with the id: ${playerId}`);
-        done();
+
       });
+      done();
   });
 
   it('It should not update a player with non-numeric id value', (done) => {
@@ -181,8 +189,9 @@ describe('Testing the player endpoints:', () => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message')
                             .eql('Please input a valid numeric value');
-        done();
+
       });
+      done();
   });
 
 
@@ -194,8 +203,9 @@ describe('Testing the player endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.data).to.include({});
-        done();
       });
+      done();
+
   });
 
   it('It should not delete a player with invalid id', (done) => {
@@ -207,8 +217,9 @@ describe('Testing the player endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Player with the id ${playerId} cannot be found`);
-        done();
       });
+      done();
+
   });
 
   it('It should not delete a player with non-numeric id', (done) => {
@@ -219,7 +230,8 @@ describe('Testing the player endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message').eql('Please provide a numeric value');
-        done();
       });
+      done();
+
   });
 });

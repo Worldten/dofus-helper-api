@@ -45,8 +45,9 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app).post('/api/v1/players/login').send(playerLogin).end((err, res) => {
       var objectJson = JSON.parse(res.text)
       token = objectJson.accessToken
-      done();
+
     })
+    done();
   });
   it('It should create an equipment', (done) => {
     
@@ -67,8 +68,9 @@ describe('Testing the equipment endpoints:', () => {
           equipment_name: equipment.equipment_name,
           player_id: null,
         });
-        done();
+
       });
+      done();
   });
 
   it('It should not create an equipment with incomplete parameters', (done) => {
@@ -84,8 +86,9 @@ describe('Testing the equipment endpoints:', () => {
       .send(equipment)
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        done();
+
       });
+      done();
   });
 
   it('It should get all equipments', (done) => {
@@ -100,8 +103,9 @@ describe('Testing the equipment endpoints:', () => {
         res.body.data[0].should.have.property('equipment_items');
         res.body.data[0].should.have.property('equipment_recipe');
         res.body.data[0].should.have.property('player_id');
-        done();
+
       });
+      done();
   });
 
   it('It should get a particular equipment', (done) => {
@@ -117,8 +121,9 @@ describe('Testing the equipment endpoints:', () => {
         res.body.data.should.have.property('equipment_items');
         res.body.data.should.have.property('equipment_recipe');
         res.body.data.should.have.property('player_id');
-        done();
+
       });
+      done();
   });
 
   it('It should not get a particular equipment with invalid id', (done) => {
@@ -131,8 +136,9 @@ describe('Testing the equipment endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Cannot find Equipment with the id ${equipmentId}`);
-        done();
+
       });
+      done();
   });
 
   it('It should not get a particular equipment with non-numeric id', (done) => {
@@ -145,8 +151,9 @@ describe('Testing the equipment endpoints:', () => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message')
                             .eql('Please input a valid numeric value');
-        done();
+
       });
+      done();
   });
 
   it('It should update a equipment', (done) => {
@@ -168,8 +175,9 @@ describe('Testing the equipment endpoints:', () => {
         expect(res.body.data.id).equal(updatedequipment.id);
         expect(res.body.data.equipment_name).equal(updatedequipment.equipment_name);
         expect(res.body.data.player_id).equal(updatedequipment.player_id);
-        done();
+
       });
+      done();
   });
 
   it('It should not update a equipment with invalid id', (done) => {
@@ -190,8 +198,9 @@ describe('Testing the equipment endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Cannot find Equipment with the id: ${equipmentId}`);
-        done();
+
       });
+      done();
   });
 
   it('It should not update a equipment with non-numeric id value', (done) => {
@@ -212,8 +221,9 @@ describe('Testing the equipment endpoints:', () => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message')
                             .eql('Please input a valid numeric value');
-        done();
+
       });
+      done();
   });
 
 
@@ -226,8 +236,9 @@ describe('Testing the equipment endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.data).to.include({});
-        done();
+
       });
+      done();
   });
 
   it('It should not delete a equipment with invalid id', (done) => {
@@ -240,8 +251,9 @@ describe('Testing the equipment endpoints:', () => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
                             .eql(`Equipment with the id ${equipmentId} cannot be found`);
-        done();
+
       });
+      done();
   });
 
   it('It should not delete a equipment with non-numeric id', (done) => {
@@ -253,7 +265,8 @@ describe('Testing the equipment endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message').eql('Please provide a numeric value');
-        done();
+
       });
+      done();
   });
 });
