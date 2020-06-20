@@ -26,7 +26,7 @@ class PlayerController {
 
   static async addPlayer(req, res) {
     console.log("On est dans le controller");
-    if (!req.body.player_mail && !req.body.player_pwd) {
+    if (!req.body.player_mail || !req.body.player_pwd) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
     }

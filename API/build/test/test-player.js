@@ -16,25 +16,16 @@ var expect = _chai["default"].expect;
 describe('Testing the player endpoints:', function () {
   it('It should create a player', function (done) {
     var player = {
-      id: 1,
+      id: 4,
       player_mail: "thomaszim@free.fr",
       player_pwd: "thomas",
-      player_username: "Worldten",
+      player_username: "WorldtenTest",
       player_jobs: {
         "Bucheron": 100,
         "Alchimiste": 66
       },
       player_characters: {
-        "Char1": {
-          "name": "Worldten",
-          "class": "Iop",
-          "level": 78
-        },
-        "Char2": {
-          "name": "WorldEight",
-          "class": "Zobal",
-          "level": 73
-        }
+
       }
     };
 

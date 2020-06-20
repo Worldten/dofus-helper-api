@@ -9,7 +9,6 @@ const { expect } = chai;
 describe('Testing the player endpoints:', () => {
   it('It should create a player', (done) => {
     const player = {
-      id: 1,
       player_mail: "thomaszim@free.fr",
       player_pwd: "thomas",
       player_username: "Worldten",
@@ -37,9 +36,7 @@ describe('Testing the player endpoints:', () => {
       .end((err, res) => {
         expect(res.status).to.equal(201);
         expect(res.body.data).to.include({
-          id: 1,
           player_mail: player.player_mail,
-          player_pwd: player.player_pwd,
           player_username: player.player_username
         });
         done();
@@ -190,7 +187,7 @@ describe('Testing the player endpoints:', () => {
 
 
   it('It should delete a player', (done) => {
-    const playerId = 1;
+    const playerId = 2;
     chai.request(app)
       .delete(`/api/v1/players/${playerId}`)
       .set('Accept', 'application/json')

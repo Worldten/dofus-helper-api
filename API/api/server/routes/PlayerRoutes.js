@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', PlayerController.getAllPlayers);
 router.post('/', PlayerController.addPlayer);
 router.post('/login', PlayerController.signIn);
-router.get('/:id', authController.verifyToken, PlayerController.getAPlayer);
+router.get('/:id', PlayerController.getAPlayer);
 router.put('/:id', PlayerController.updatedPlayer);
 router.delete('/:id', PlayerController.deletePlayer);
 

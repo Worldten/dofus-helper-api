@@ -5,11 +5,52 @@ import app from '../index';
 
 chai.use(chatHttp);
 const { expect } = chai;
+var token = '';
 
 describe('Testing the equipment endpoints:', () => {
+  it('Creating a user', (done)=>{
+    const player = {
+      player_mail: "thomaszim@free.fr",
+      player_pwd: "thomas",
+      player_username: "Worldten",
+      player_jobs: {
+        "Bucheron" : 100,
+        "Alchimiste": 66
+      },
+      player_characters: {
+        "Char1":{
+          "name": "Worldten",
+          "class": "Iop",
+          "level": 78
+        },
+        "Char2":{
+          "name": "WorldEight",
+          "class": "Zobal",
+          "level": 73
+        }
+      }
+    };
+    chai.request(app)
+      .post('/api/v1/players')
+      .set('Accept', 'application/json')
+      .send(player)
+      .end((err, res) => {
+
+      });
+
+    const playerLogin = {
+      mail: player.player_mail,
+      password: player.player_pwd
+    }
+    chai.request(app).post('/api/v1/players/login').send(playerLogin).end((err, res) => {
+      var objectJson = JSON.parse(res.text)
+      token = objectJson.accessToken
+      done();
+    })
+  });
   it('It should create an equipment', (done) => {
+    
     const equipment =  {
-      id: -1,
       equipment_name: "Test",
       equipment_items: {},
       equipment_recipe: {},
@@ -18,11 +59,11 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .post('/api/v1/equipments')
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .send(equipment)
       .end((err, res) => {
         expect(res.status).to.equal(201);
         expect(res.body.data).to.include({
-          id: -1,
           equipment_name: equipment.equipment_name,
           player_id: null,
         });
@@ -39,6 +80,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .post('/api/v1/equipments')
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .send(equipment)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -50,6 +92,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .get('/api/v1/equipments')
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         res.body.data[0].should.have.property('id');
@@ -62,10 +105,11 @@ describe('Testing the equipment endpoints:', () => {
   });
 
   it('It should get a particular equipment', (done) => {
-    const equipmentId = -1;
+    const equipmentId = 1;
     chai.request(app)
       .get(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         res.body.data.should.have.property('id');
@@ -82,6 +126,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .get(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .end((err, res) => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
@@ -95,6 +140,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .get(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .end((err, res) => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message')
@@ -104,7 +150,7 @@ describe('Testing the equipment endpoints:', () => {
   });
 
   it('It should update a equipment', (done) => {
-    const equipmentId = -1;
+    const equipmentId = 1;
     const updatedequipment = {
       id: equipmentId,
       equipment_name: "TestUpdate",
@@ -115,6 +161,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .put(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .send(updatedequipment)
       .end((err, res) => {
         expect(res.status).to.equal(200);
@@ -137,6 +184,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .put(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .send(updatedequipment)
       .end((err, res) => {
         expect(res.status).to.equal(404);
@@ -158,6 +206,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .put(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .send(updatedequipment)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -169,10 +218,11 @@ describe('Testing the equipment endpoints:', () => {
 
 
   it('It should delete a equipment', (done) => {
-    const equipmentId = -1;
+    const equipmentId = 1;
     chai.request(app)
       .delete(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.data).to.include({});
@@ -185,6 +235,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .delete(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .end((err, res) => {
         expect(res.status).to.equal(404);
         res.body.should.have.property('message')
@@ -198,6 +249,7 @@ describe('Testing the equipment endpoints:', () => {
     chai.request(app)
       .delete(`/api/v1/equipments/${equipmentId}`)
       .set('Accept', 'application/json')
+      .set('x-access-token', token)
       .end((err, res) => {
         expect(res.status).to.equal(400);
         res.body.should.have.property('message').eql('Please provide a numeric value');
